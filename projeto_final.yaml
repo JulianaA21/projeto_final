@@ -1,0 +1,373 @@
+openapi: 3.0.3
+info:
+  title: API da aplicação 
+  description: Definição exemplificativa de uma API em OpenAPI 3 para a ficha 4 da UC de Programação III do curso de Multimédia do ISMT. 
+  termsOfService: http://swagger.io/terms/
+  contact: 
+    email: ismt@ismt.pt
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs: 
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://www.localhost:5000/api/v1
+    description: Servidor Local
+tags: 
+  - name: student
+    description: Dados referentes aos alunos do curso
+  - name: teacher 
+    description: Dados referentes aos professores das disciplinas
+  - name: subject
+    description: Dados referentes às disciplinas do curso
+
+paths:
+  /student:
+    put:
+      tags:
+        - student
+      summary: Atualizar um aluno 
+      description: Atualiza um aluno exixtente, de acordo com ID
+      operationId: AtualizaAluno
+      requestBody:
+        description: Dados do aluno para atualizar 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        '200':
+          description: Operação excutada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'          
+        '400':
+          description: ID inválido
+        '404':
+          description: Estudante não existe
+        '422':
+          description: Erro de execução
+
+    post:
+      tags:
+        - student
+      summary: Criar aluno
+      description: Criar novo aluno nesta escola
+      operationId: CriarAluno
+      requestBody:
+        required: true
+        description: Dados do novo aluno 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '201':
+          description: Aluno criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'          
+        '400': 
+          description: Pedido inválidos
+        '500': 
+          description: Error a executar o pedido
+
+  /student/{id}:
+    put:
+      tags:
+        - student
+      summary: Atualizar alunos
+      description: Atualizar um aluno de acordo com o id
+      operationId: AtualizarAluno
+      parameters:
+        - name: id
+          in: path
+          description: Id  do aluno
+          required: true
+          explode: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Aluno Atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'          
+        '400':
+          description: ID inválido
+        '404':
+          description: Estudante não existe
+        '500':
+          description: Erro de execução
+
+    delete:
+      tags:
+        - student
+      summary: Eliminar aluno
+      description: Eliminar um aluno de acordo com o id
+      operationId: eliminarAluno
+      parameters:
+        - name: id
+          in: path
+          description: ID do aluno a ser eliminado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Executado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'  
+        '400':
+          description: Pedido invalido
+        '404':
+          description: Aluno não encontrado
+
+  /subject:
+    put:
+      tags:
+        - subject
+      summary: Finds Pets by tags
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+      operationId: findPetsByTags
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subject'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subject'
+        '400':
+          description: Invalid tag value
+
+    post:
+      tags:
+        - subject
+      summary: Criar uma disciplina
+      description: Criar uma nova disciplina 
+      operationId: criarDisciplina
+      requestBody:
+        description: Dados do da nova disciplina
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subject'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Subject'
+        required: true
+      responses:
+        '201':
+          description: Disciplina criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'          
+        '400': 
+          description: Dados inválidos
+        '422':
+          description: Erro de execução
+
+  /subject/{id}:
+    get:
+      tags:
+        - subject
+      summary: Pesquisar alunos
+      description: Pesquisar por um aluno de acordo com o id
+      parameters:
+        - name: id
+          in: path
+          description: Id  do aluno
+          required: true
+          explode: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Executado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subject'          
+        '400':
+          description: ID inválido
+        '404':
+          description: Estudante não existe
+        '422':
+          description: Erro de execução
+
+    delete:
+      tags:
+        - subject
+      summary: Eliminar disciplina
+      description: Eliminar uma disciplina de acordo com o id
+      operationId: eliminarDisciplina
+      parameters:
+        - name: id
+          in: path
+          description: Eliminar disciplina
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Executado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subject'  
+        '400':
+          description: Inválido
+      
+components:
+  schemas:
+    Student:
+      required:
+        - id
+        - name
+        - nif
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+          description: Chave primária da entidade aluno
+          example: 1
+        name:
+          type: string
+          description: Nome completo do aluno
+          example: Carlos Silva
+        address:
+          type: string
+          description: Nome completo do aluno
+          example: Rua A
+        nif:
+          type: integer
+          description: NIF do aluno
+          example: 123456789
+        subject:
+          type: array
+          items: 
+            type: object
+          description: Todas as disciplinas a que o aluno se encontra inscrito
+    Subject:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: inte64
+          description: Chave primária da disciplina
+          example: 1
+        name:
+          type: string
+          description: Nome da disciplina
+          example: Matemática
+        totalHours:
+          type: number
+          format: float
+          description: Total de horas letivas da disciplina
+          example: 25
+        Teacher:
+           type: object
+           description: Professor que leciona a disciplina 
+           
+
+        
+    Teacher:
+      required:
+        - id
+        - name
+        - nif
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+          description: Chave primária do professor
+          example: 1
+        name:
+          type: string
+          description: Nome completo do aluno
+          example: Maria Sousa
+        email:
+          type: string
+          description: Endereço de email do professor
+          example: maria@ismt.pt
+        nif:
+          type: integer
+          description: NIF do aluno
+          example: 123456789
+        subject:
+          type: array
+          items: 
+            type: object
+          description: Todas as disciplinas a que o aluno se encontra inscrito
+  requestBodies:
+    Student:
+      description: Dados do aluno
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+    Subject:
+      description: Lista de disciplinas
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Subject'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify in your account
+            read:pets: read 
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
