@@ -1,0 +1,55 @@
+version: '1.8'
+
+services:
+  node:
+    container_name: padelcoimbra_webserver
+    image: node:latest
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - mysql
+    volumes:
+      - ./node_app:/app
+    networks:
+      - padelcoimbra-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql_padelcoimbra
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: namp_db
+      MYSQL_USER: namp_user
+      MYSQL_PASSWORD: namp_PASS
+    networks:
+      - padelcoimbra-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_padelcoimbra
+    restart: always
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: 123
+    networks:
+      - padelcoimbra-network
+
+volumes:
+  node_app:
+  mysql_data:
+
+networks:
+  padelcoimbra-network:
+    driver: bridge
