@@ -1,0 +1,16 @@
+<!-- views/pages/login.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/api/login" method="POST"> <!-- Formulário tradicional -->
+        <input type="text" name="username" placeholder="Usuário" required>
+        <input type="password" name="password" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <a href="/register">Registrar</a>
+</body>
+</html>

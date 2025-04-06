@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas de Campo</title>
+</head>
+<body>
+
+  <h1>Horários disponíveis para 2025-04-07</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Hora de Início</th>
+        <th>Hora de Fim</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% horarios.forEach(function(horario) { %>
+        <tr>
+          <td><%= horario.hora_inicio %></td>
+          <td><%= horario.hora_fim %></td>
+          <td>
+            <% if (horario.disponivel == 1) { %>
+              <button onclick="reserveSlot('<%= horario.hora_inicio %>', '<%= horario.hora_fim %>')">Reservar</button>
+            <% } else { %>
+              <span style="color: gray;">Indisponível</span>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <script>
+    function reserveSlot(hora_inicio, hora_fim) {
+      // Aqui você pode fazer um pedido AJAX para reservar o horário
+      fetch(`/api/reserveSlot?hora_inicio=${hora_inicio}&hora_fim=${hora_fim}`, {
+        method: 'POST'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Reserva realizada com sucesso!');
+          location.reload();  // Atualiza a página para mostrar os horários atualizados
+        } else {
+          alert('Erro ao realizar a reserva.');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
