@@ -1,0 +1,12 @@
+/* Hide the all-day header and row */
+.rbc-allday-cell,
+.rbc-time-header-cell .rbc-allday-cell,
+.rbc-time-header-content .rbc-allday-cell,
+.rbc-allday-events {
+  display: none !important;
+}
+
+/* Adjust the height of the time grid to compensate */
+.rbc-time-content {
+  border-top: none;
+}

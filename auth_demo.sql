@@ -24,30 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `marcacoes`
+-- Estrutura da tabela `aluguer`
 --
 
-CREATE TABLE `marcacoes` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `aluguer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fim` time NOT NULL,
   `disponivel` tinyint(1) DEFAULT 1
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `marcacoes`
+-- Extraindo dados da tabela `aluguer`
 --
 
-INSERT INTO `marcacoes` (`id`, `data`, `hora_inicio`, `hora_fim`, `disponivel`) VALUES
+INSERT INTO `aluguer` (`id`, `data`, `hora_inicio`, `hora_fim`, `disponivel`) VALUES
 (7, '2025-04-07', '09:00:00', '10:00:00', 1),
-(8, '2025-04-07', '10:00:00', '11:00:00', 1),
+(8, '2025-04-07', '10:00:00', '11:00:00', 0),
 (9, '2025-04-07', '11:00:00', '12:00:00', 1),
-(10, '2025-04-07', '12:00:00', '13:00:00', 1),
+(10, '2025-04-07', '12:00:00', '13:00:00', 0),
 (11, '2025-04-07', '13:00:00', '14:00:00', 1),
-(12, '2025-04-07', '14:00:00', '15:00:00', 1),
+(12, '2025-04-07', '14:00:00', '15:00:00', 0),
 (13, '2025-04-07', '15:00:00', '16:00:00', 1),
-(14, '2025-04-07', '16:00:00', '17:00:00', 1),
+(14, '2025-04-07', '16:00:00', '17:00:00', 0),
 (15, '2025-04-07', '17:00:00', '18:00:00', 1);
 
 -- --------------------------------------------------------
@@ -57,12 +58,13 @@ INSERT INTO `marcacoes` (`id`, `data`, `hora_inicio`, `hora_fim`, `disponivel`) 
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefone` varchar(20) NOT NULL,
-  `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
+  `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -70,17 +72,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `telefone`, `criado_em`) VALUES
-(9, 'sdsd', '$2b$10$gWlOpuhOGLDowbiuR8nQI.tfUOoky1BlkRftHbsI.tJ9hdoocxNQK', 'we@ee', '123456789', '2025-04-06 17:02:58'),
-(10, 'gui', '$2b$10$QhPw1C3uVk0BpPzBa2JRoOz1Vkpl8xDYFqCzPia.dAEONrB33Saom', 'gui@gui', '123456789', '2025-04-06 17:56:44');
+(9, 'joao123', '$2b$10$gWlOpuhOGLDowbiuR8nQI.tfUOoky1BlkRftHbsI.tJ9hdoocxNQK', 'we@ee', '913456789', '2025-04-06 17:02:58'),
+(10, 'gui', '$2b$10$QhPw1C3uVk0BpPzBa2JRoOz1Vkpl8xDYFqCzPia.dAEONrB33Saom', 'gui@gui', '963456789', '2025-04-06 17:56:44');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `marcacoes`
+-- Índices para tabela `aluguer`
 --
-ALTER TABLE `marcacoes`
+ALTER TABLE `aluguer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -95,9 +97,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de tabela `marcacoes`
+-- AUTO_INCREMENT de tabela `aluguer`
 --
-ALTER TABLE `marcacoes`
+ALTER TABLE `aluguer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
