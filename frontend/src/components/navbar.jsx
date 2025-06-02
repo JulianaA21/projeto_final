@@ -51,7 +51,7 @@ const AppNavbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="http://localhost:5173/aulas">
+              <a className="nav-link" href="http://localhost:5173/class">
                 Aulas
               </a>
             </li>

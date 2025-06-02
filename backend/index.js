@@ -1,6 +1,54 @@
 /* importar o módulo do EXPRESS */
 const express = require("express");
 const app = express(); //definir a nossa app em EXPRESS
+const db = require('./config/db');
+const cors = require('cors');
+const port = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+
+// GET - Mostrar todos os usuários
+app.get('/users', (req, res) => {
+  db.query('SELECT * FROM users', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// POST - Adicionar novo usuário
+app.post('/user', (req, res) => {
+  const { nome, email, senha } = req.body;
+  db.query('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', 
+    [nome, email, senha], 
+    (err, results) => {
+      if (err) return res.status(500).send(err);
+      res.send('user adicionado');
+  });
+});
+
+// PUT - Atualizar user
+app.put('/user/:id', (req, res) => {
+  const { nome, email } = req.body;
+  const id = req.params.id;
+  db.query('UPDATE user SET nome = ?, email = ? WHERE id = ?', 
+    [nome, email, id], 
+    (err) => {
+      if (err) return res.status(500).send(err);
+      res.send('user atualizado');
+  });
+});
+
+// DELETE - Remover cliente
+app.delete('/user/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('DELETE FROM usuarios WHERE id = ?', [id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send('user removido');
+  });
+});
+
 
 //configurações do bootstrap
 app.use(express.static("./assets"));
@@ -19,7 +67,7 @@ app.use(express.urlencoded({extended: true})); //permitir pedidos do exterior
 const rotas = require("./routes/main.route");
 app.use("/", rotas);
 
-app.use("/", require("./routes/cliente.route"));
+//app.use("/", require("./routes/cliente.route"));
 
 //instancia e inicia o servidor
 app.listen(app.get("port"), () => {

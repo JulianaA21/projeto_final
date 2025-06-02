@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
   host: 'localhost',   // Coloca aqui o host correto
   user: 'root',        // Coloca o teu nome de utilizador do MySQL
-  password: '',        // Coloca a tua password do MySQL
+  password: '123',        // Coloca a tua password do MySQL
   database: 'auth_demo' // Base de dados que usas
 });
 
@@ -14,7 +14,7 @@ db.connect(err => {
     console.error('Erro na conexão:', err);
     return;
   }
-  console.log('🟢 Conectado ao MySQL');
+  console.log('Conectado ao MySQL');
 });
 
 // Exporta a instância de db

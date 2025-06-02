@@ -1,5 +1,5 @@
 # Dockerfile para o frontend (dev)
-FROM node:18
+FROM node:latest
 WORKDIR /app
 COPY ./package.json ./
 COPY ./package-lock.json ./
