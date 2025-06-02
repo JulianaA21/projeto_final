@@ -55,7 +55,8 @@ INSERT INTO `aluguer` (`id`, `data`, `hora_inicio`, `hora_fim`, `disponivel`) VA
 
 --
 -- Estrutura da tabela `users`
---
+
+
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

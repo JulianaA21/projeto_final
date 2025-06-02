@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // make sure Bootstrap CSS is imported
-import logo from '../assets/PadelCoimbra.svg';
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "../assets/PadelCoimbra.svg";
 
 const AppNavbar = () => {
   const [navCollapsed, setNavCollapsed] = useState(true);
@@ -18,7 +18,7 @@ const AppNavbar = () => {
           <img
             src={logo}
             alt="PadelCoimbra Logo"
-            style={{ height: '30px', objectFit: 'contain' }}
+            style={{ height: "30px", objectFit: "contain" }}
           />
         </a>
 
@@ -36,12 +36,18 @@ const AppNavbar = () => {
 
         {/* Collapsible nav items */}
         <div
-          className={`collapse navbar-collapse justify-content-end ${navCollapsed ? '' : 'show'}`}
+          className={`collapse navbar-collapse justify-content-end ${
+            navCollapsed ? "" : "show"
+          }`}
           id="navbarNav"
         >
           <ul className="navbar-nav align-items-center">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="http://localhost:5173">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                href="http://localhost:5173"
+              >
                 Home
               </a>
             </li>
@@ -61,7 +67,7 @@ const AppNavbar = () => {
               className={`nav-item dropdown ms-3`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <a
                 className="nav-link dropdown-toggle d-flex align-items-center"
@@ -70,9 +76,9 @@ const AppNavbar = () => {
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded={dropdownOpen}
-                onClick={e => e.preventDefault()} // prevent page jump on click
+                onClick={(e) => e.preventDefault()}
               >
-                {/* Account SVG icon */}
+                {/* Account icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -81,18 +87,29 @@ const AppNavbar = () => {
                   className="bi bi-person-circle"
                   viewBox="0 0 16 16"
                 >
-                  <path d="M13.468 12.37C12.758 11.226 11.513 10.5 10 10.5s-2.758.726-3.468 1.87A6.987 6.987 0 0 1 2 8a6.987 6.987 0 0 1 4.532-6.37C7.242 3.274 8.487 4 10 4s2.758-.726 3.468-1.87A6.987 6.987 0 0 1 18 8a6.987 6.987 0 0 1-4.532 6.37zM8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                  <path d="M13.468 12.37C12.758 11.226 11.513 10.5 10 10.5s-2.758.726-3.468 1.87A6.987 6.987 0 0 1 2 8a6.987 6.987 0 0 1 4.532-6.37C7.242 3.274 8.487 4 10 4s2.758-.726 3.468-1.87A6.987 6.987 0 0 1 18 8a6.987 6.987 0 0 1-4.532 6.37zM8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
                 </svg>
               </a>
               <ul
-                className={`dropdown-menu dropdown-menu-end ${dropdownOpen ? 'show' : ''}`}
+                className={`dropdown-menu dropdown-menu-end ${
+                  dropdownOpen ? "show" : ""
+                }`}
                 aria-labelledby="userDropdown"
               >
+                <li>
+                  <a className="dropdown-item" href="/perfil">
+                    Perfil
+                  </a>
+                </li>
+
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
                 <li>
                   <a
                     className="dropdown-item"
                     href="http://localhost:5173/login"
-                    onClick={() => alert('Até já...')}
+                    onClick={() => alert("Até já...")}
                   >
                     Sair da conta
                   </a>
