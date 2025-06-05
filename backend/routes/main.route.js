@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+
+
 /* http://localhost:5001/ */
 router.get("/", function(req, res) {
     //res.send("Rota principal da aplicação em NodeJS!");

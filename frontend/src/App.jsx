@@ -7,6 +7,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
 import Class from './pages/class';
+import Perfil from './pages/perfil'
 
 import { ReservationsProvider } from './context';
 
@@ -19,6 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/class" element={<Class />} />
+        <Route path="/perfil" element={<Perfil />} />
+
+
       </Routes>
     </ReservationsProvider>
   );
